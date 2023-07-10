@@ -15,6 +15,26 @@ function getList() {
   });
 }
 
+const errorT = document.querySelector("#error");
+const newUl = document.querySelector("#list");
+
+let promise = getList();
+
+function callList(list){
+  list.forEach((hobbit) => {
+      let li = document.createElement("li");
+      li.textContent = hobbit;
+      newUl.appendChild(li);
+  });
+}
+
+function catchErr(err){
+  console.error(err);
+  errorT.textContent = err.message;
+}
+
+promise.then(callList).catch(catchErr);
+
 // TODO: Handle the resolved or rejected states of the promise
 
 // TODO: If the promise resolves with the list of hobbits
